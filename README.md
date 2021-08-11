@@ -1,4 +1,4 @@
-#### Convensions
+#### Conventions
 
 - If an element is parenthesised (e.g. `(a,)`), then it is optional and needs not to exist on the stack in order for the command to execute. It might have different uses depending on whether the argument is present or not, but that is clarified for each command which acts like this.
 
@@ -108,7 +108,6 @@ Command|Elements Popped|Description|
 `]` | - | Close all loops and if statements
 `{` | `a` | Sort **a**. Push `sorted(a)`
 `~` | `a,b` | Bitwise OR.
-`Λ` | `a,b,c` | Store **a** canvas with `{a: num, b: filler, c: pattern}` (todo: docs)
 `‚` | `a,b` | Pair. Push `[a, b]`
 `†` | `a,b` | Push **a** with **b** filtered to the front
 `‡` | `a,b,c` | Transliterate. Push `a.transliterate(b -> c)`
@@ -140,10 +139,8 @@ Command|Elements Popped|Description|
 `¨` | `a` | Pop, remove the last element of **a**. Push `a[0:-1]`
 `ª` | `a,b` | Append **b** to **a** as a list
 `«` | `a,b` | Merge / Concatenate. Push `merged(a,b)` if both are lists, else push `concatenated(a, b)`
-`λ` | `(a)` | Recursive list generation with base case(s) **a** (**a** defaults to **1**). Usage: `λ<flag?> CODE } --> f(n) = CODE`
 `°` | `a` | Raise **10** to the **a**th power. Push `10 ** a`
 `±` | `a` | Bitwise not (complement). Push `~a`
-`µ` | `a` | `while counter_variable != a, do...` (used to find the **n**th number which satisfies a condition)
 `·` | `a` | Double. Push `2 * a`
 `¸` | `a` | Wrap / Listify. Push `[a]`
 `»` | `(a)` | if `(a)` is a list, join it by newlines, else join stack by newlines
@@ -166,16 +163,13 @@ Command|Elements Popped|Description|
 `Ò` | `a` | List of prime factors of **a**, counting multiplicities.
 `Ó` | `a` | List of exponents of **a**'s prime factorization (`2^a`, `3^b`, `5^c`, `7^d`, etc.)
 `Ô` | `a` | Connected uniquified **a**
-`Õ` | `a` | Totient. Push `euler_totient(a)`
 `Ö` | `a,b` | Divisible? Push `a % b == 0`
-`×` | `a,b` | Sequence product. Push `a × b` (used for strings)
 `Ø` | `a` | **a**th prime (zero-indexed)
 `Ù` | `a` | Deduplicate. Push uniquified **a**
 `Ú` | `a,b` | Trim leading and trailings **b**'s of **a**
 `Û` | `a,b` | Left strip. Push **a** with leading **b**'s trimmed off
 `Ü` | `a,b` | Right strip. Push **a** with trailing **b**'s trimmed off
 `Ý` | `a` | Inclusive 0-based range. Push **[0 .. a]**
-`Þ` | `a` | Cycle **a**. Repeat it indefinitely, yielding an infinite list
 `ß` | `a` | Minimum. Extract smallest element of list
 `à` | `a` | Maximum. Extract greatest element of list
 `á` | `a` | Letters of **a**
@@ -192,7 +186,6 @@ Command|Elements Popped|Description|
 `í` | `a` | Reverse each. Push `[reversed(Q) for Q in a]` (short for `€R`)
 `î` | `a` | Ceil. Push `round_up(a)`
 `ï` | `a` | Trim decimals. Push `int(a)`
-`ò` | `a` | Round to the nearest integer. Push `round_nearest(a)` (bankers rounding)
 `ô` | `a,b` | Split **a** in pieces of length **b**
 `ö` | `a,b` | Convert **a** from base **b** to integer. Push `int(a, b)`
 `õ`  | - | Empty string
@@ -209,9 +202,7 @@ Command|Elements Popped|Description|
 `.c`| `a` | Left-focused centralize. Push `centralized_left(a)`
 `.C`| `a` | Right-focused centralize. Push `centralized_right(a)`
 `.D`| `a,b` | Push **b** copies of **a** if **b** is an integer, else push **len(b)** copies
-`.E`| `a` | Evaluate. Push `eval(a)` (does not work in safe mode)
 `.g`| - | Length of the stack
-`.i`| `a,b` | Check whether **b** occurs in **a**, used for infinite lists that are guaranteed to be non-decreasing.
 `.I`| `a,b` | **b**th permutation of **a**
 `.k`| `a,b` | Flat index of **b** in **a**
 `.l`| `a` | Is lowercase? Push `is_lower(a)`
@@ -221,54 +212,39 @@ Command|Elements Popped|Description|
 `.n`| `a,b` | Logarithm of **a** in base **b**. Push `log_b(a)`
 `.o`| `a,b` | Overlap. Push `overlap(b)`
 `.p`| `a` | Prefixes. Push `prefixes(a)`
-`.R`| `a` | Random element. Push `random_pick(a)`
-`.r`| `a` | Random shuffle. Push `random_shuffle(a)`
 `.s`| `a` | Suffixes. Push `suffixes(a)`
 `.S`| `a,b` | Compare. Push **1** if **a > b**, **-1** if **a < b**, **0** if **a** equals **b**
 `.u`| `a` | Is uppercase? Push `is_upper(a)`
-`.v`| `a` | Convert from roman numeral string to integer (reverse of `.X`)
-`.V`| `a` | Run as 05AB1E code
-`.w`| `a` | Data read from the URL **a**
-`.W`| `a` | Wait **a** milliseconds
-`.x`| `a,b` | Closest. Push the element in **a** closest to **b** (either absolute difference or string distance)
-`.X`| `a` | Convert from integer to roman numeral string
 `.$`| `a,b` | Drop **b** elements from **a** (`a[b:]`)
 `._`| `a,b` | Rotate **a** **b** units to the left
 `.:`| `a,b,c` | Replace all. Push `a.replace(b, c)`
 `.;`| `a,b,c` | Replace first. Push `a.replace_first(b, c)`
 `.±`| `a` | Sign. Push **-1** if **a < 0**, **1** if **a > 0**, **0** otherwise.
 `.ª`| `a` | Sentence capitalisation. Push `sentence_cased(a)`
-`.¡`| `a` | Split **a** by function result. Usage: `.¡ CODE }`
 `.²`| `a` | Logarithm with base **2**. Push `log_2(a)`
 `.ï`| `a` | Integer? Push `is_int(a)`
 `.¿`| `(a,)b` | Least common multiple (lcm / hcf). Push `lcm(b)` if **b** is list, else push `lcm(b, a)`
-`.æ`| `a` | Compute permutations by function result. Usage: `.æ CODE }`
 `.γ`| `a` | Group **a** by function result. Usage: `.γ CODE }`
 `.ø`| `a,b` | Surround **a** with **b**
 `.«`| `a` | Right Reduce (foldr). Folds a dyadic command between each element in a list from right to left
 `.»`| `a` | Left Reduce (foldl). Folds a dyadic command between each element in a list from right to left with opposite right / left operands
-`.Þ`| `a` | Cycle the last element, yielding an infinite list. 
 `.¢`| `a,b` | Count the occurrences of **b** in **a** without vectorizing.
 `.ι`| `a,b` | Interleave **a** and **b**
 `.š`| `a` | Swap / Switch capitalisation. Push `switch_cased(a)`
 `.Δ`| `a` | Find the first element of **a** that results in **1** when ran through `CODE`. Usage: `.Δ CODE }`
-`.Γ`| `a` | Cumulative fixed-point. Apply `CODE` to the current value until the result no longer changes, collecting all intermediate results. Usage: `.Γ CODE }`
 `.ā`| `a` | Enumerate **a**. Push `enumerated(a)`
 `.À`| - | Rotate stack 1 left
 `.Á`| - | Rotate stack 1 right
-`.•`| - | Decompress a base 255 alphabet based string
 `.¥`| `a` | Undelta. Push the cumulative sum of **a**, with a zero prepended
 `.º`| `a` | Intersected mirror
 `.∊`| `a` | Intersected vertical mirror
 `.Æ`| `a,b` | All **b**-element combinations of **a**
 `.ý`| `a,b` | Intersperse **a** with **b** (e.g. `[1, 2, 3] 0 .ý --> [1, 0, 2, 0, 3]`)
-`.Λ`| `a,b,c` | Store **a** canvas with `{a: num, b: filler, c: pattern}` and push the string to the stack
 `.Ø`| `a` | 0-based index of the greatest prime less than or equal to **a**
 `.ò`| `a,b` | Round **a** with **b** digits precision (bankers rounding)
 `.Œ`| `a,b` | Partitions of **a** containing **b** elements. All possible ways to divide **a** into **b** pieces
 `.œ`| `a` | Partiton **a**
 `.£`| `a,b` | Last **b** elements  of **a**. Push `a[-b:]`
-`.µ`| - | Reset the counter variable to 0. `counter_variable = 0`
 `т`  | - | Push 100
 `₁`  | - | Push 256. In a recursive environment, push **a(n - 1)** instead.
 `₂`  | - | Push 26. In a recursive environment, push **a(n - 2)** instead.
@@ -280,7 +256,6 @@ Command|Elements Popped|Description|
 `$`  | - | Push 1 and input (used for sequences)
 `'`  | - | Character literal (e.g. `'a` pushes `"a"`)
 `)`  | - | Wrap total stack to an array
-`.`  | - | Two char functions
 `0`  | - | Numeric literal
 `1`  | - | Numeric literal
 `2`  | - | Numeric literal
@@ -291,42 +266,17 @@ Command|Elements Popped|Description|
 `7`  | - | Numeric literal
 `8`  | - | Numeric literal
 `9`  | - | Numeric literal
-`[`  | - | Start an infinite loop
-`\`  | - | Delete last item
-`]`  | - | End infinite loop
-`\|`  | - | Place the rest of the input in an array until an empty newline or EOF is found.
 `}`  | - | Used to close if statements, loops, etc.
-`Ƶ`  | - | Convert the next char from base 255 to base 10 and add 101
-`€`  | - | Single-function map. Apply the next command to each element in the list.
-`„`  | - | 2-char string / can also be used for 2 compressed strings
-`…`  | - | 3-char string / can also be used for 3 compressed strings
-`Ž`  | - | Two-character compressed string
-`‘`  | - | For compressed strings (upper)
-`’`  | - | For compressed strings (no implicit space)
-`“`  | - | For compressed strings (normal)
-`”`  | - | For compressed strings (title)
-`•`  | - | Start / End a 1-9 char compressed string
 `¤`  | - | Tail (Get **a**). Push `tail(a)`
-`©`  | - | Store **a** in register_c without popping
 `¬`  | - | Head (Get **a**). Push `head(a)`
-`®`  | - | Push the last item from register_c
-`¯`  | - | Global array
 `²`  | - | Second item from the input history
 `³`  | - | Third item from the input history
-`´`  | - | Clear global array
 `¶`  | - | Newline character (`\n`)
 `¹`  | - | Push the first item from the input history
 `º`  | - | Mirror.
-`¼`  | - | Increment the counter variable. `counter_variable += 1`
-`½` | `a,` | if **a** is **1**, then increment the counter variable
-`¾`  | - | Counter variable
-`.¼` | - | Decrement the counter variable. `counter_variable -= 1`
-`Å`  | - | Extended math and list commands
 `Î`  | - | Push 0 and input
 `Ð`  | - | Triplicate top of stack (pop **a**, push **a**, push **a**, push **a**)
-`ë`  | - | Else statement
 `ð`  | - | Push a space character
-`ÿ`  | - | Used for string interpolation, pop **a** and replace `ÿ` with `str(a)`
 
 ## `Å` - Commands (Extended Commands)
 
